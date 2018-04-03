@@ -1,5 +1,8 @@
 #!/bin/sh
 
+cd `dirname $0`
+. ./env.sh
+
 curl -s -L 'https://git.postgresql.org/gitweb/?p=postgresql.git;a=rss;h=refs/heads/master' | grep pubDate | head -1 > latest.txt
 diff -rc latest.txt last.txt > /dev/null
 
