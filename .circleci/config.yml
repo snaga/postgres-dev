@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.12.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: docker build -t uptimejp/postgres-dev .
+      - run:
+          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+      - run:
+          command: docker push uptimejp/postgres-dev
+
